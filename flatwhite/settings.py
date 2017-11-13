@@ -87,6 +87,9 @@ INSTALLED_APPS = [
     "django.contrib.sitemaps",
     'django.contrib.staticfiles',
 
+    'django_extensions',
+    'django_celery_beat',
+
     'fluent_pages',
     'mptt',
     'parler',
