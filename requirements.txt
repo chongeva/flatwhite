@@ -1,4 +1,5 @@
 Django
+django-celery-beat
 django-constance
 django-extensions
 django-form-utils
@@ -11,12 +12,15 @@ django-fluent-pages[flatpage,redirectnode, fluentpage, text]
 django-fluent-contents
 django-wysiwyg
 django-slug-preview
+django-any-urlfield
 
 cssmin
 jsmin
 python-memcached
 psycopg2
 Pillow
+celery[redis]
+
 
 
 
