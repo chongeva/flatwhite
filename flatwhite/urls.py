@@ -25,7 +25,31 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
 
+from fluent_pages.sitemaps import PageSitemap
+from fluent_pages.views import RobotsTxtView
+from django.contrib.sitemaps.views import sitemap
 
+sitemaps = {
+    'pages': PageSitemap,
+}
+
+urlpatterns += [
+    url(r'^sitemap.xml$', sitemap, {'sitemaps': sitemaps}),
+    url(r'^robots.txt$', RobotsTxtView.as_view()),
+]
+
+if settings.DEBUG:
+    # Adds the media URL to be used in development
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
+
+    urlpatterns += static(
+        settings.SMEDIA_URL,
+        document_root=settings.SMEDIA_ROOT
+    )
+    
 urlpatterns += [
     url(r'', include('fluent_pages.urls')),
 ]

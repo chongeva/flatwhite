@@ -71,7 +71,8 @@ SOUTH_LOGGING_FILE = os.path.join(LOG_ROOT, 'south.log')
 SOUTH_LOGGING_ON = True
 
 WSGI_APPLICATION = '%s.wsgi.application' % PROJECT_APP
-
+SMEDIA_URL = '/smedia/'
+SMEDIA_ROOT = os.path.join(STATIC_BASE, PROJECT_APP, 'smedia')
 
 # Application definition
 
