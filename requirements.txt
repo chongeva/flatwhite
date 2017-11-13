@@ -1,0 +1,14 @@
+Django
+django-constance
+django-extensions
+django-form-utils
+django-nested-admin
+
+cssmin
+jsmin
+python-memcached
+psycopg2
+Pillow
+
+
+
