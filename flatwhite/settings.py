@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from django import VERSION as DJANGO_VERSION
+from django.utils.translation import ugettext_lazy as _
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,19 +28,126 @@ SECRET_KEY = 'uj=k04g2t-k#m$m8_tog*n84n)qd_9x2!w^clay@@gi#80fkq8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+# Internationalization
+# https://docs.djangoproject.com/en/1.10/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'Asia/Kuala_Lumpur'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+
+#########
+# PATHS #
+#########
+PROJECT_APP_PATH = os.path.dirname(os.path.abspath(__file__))
+PROJECT_APP = os.path.basename(PROJECT_APP_PATH)
+PROJECT_ROOT = BASE_DIR = os.path.dirname(PROJECT_APP_PATH)
+
+STATIC_BASE = '/opt/static'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(STATIC_BASE, PROJECT_APP, 'static')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(STATIC_BASE, PROJECT_APP, 'media')
+COMPRESS_ROOT = STATIC_ROOT
+ROOT_URLCONF = '%s.urls' % PROJECT_APP
+
+CACHE_MIDDLEWARE_KEY_PREFIX = PROJECT_APP
+CSRF_COOKIE_NAME = '%s_csrf_token' % PROJECT_APP
+LANGUAGE_COOKIE_NAME = '%s_language' % PROJECT_APP
+SESSION_COOKIE_NAME = '%s_session' % PROJECT_APP
+FORMS_UPLOAD_ROOT = os.path.join(MEDIA_ROOT, 'forms')
+LOG_ROOT = os.path.join(PROJECT_APP_PATH, 'logs')
+TMP_ROOT = os.path.join(MEDIA_ROOT, 'tmp')
+
+SOUTH_LOGGING_FILE = os.path.join(LOG_ROOT, 'south.log')
+SOUTH_LOGGING_ON = True
+
+WSGI_APPLICATION = '%s.wsgi.application' % PROJECT_APP
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'flatwhite',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "django.contrib.sites",
+    "django.contrib.sitemaps",
     'django.contrib.staticfiles',
+
+    'fluent_pages',
+    'mptt',
+    'parler',
+    'polymorphic',
+    'polymorphic_tree',
+    'slug_preview',
+
+    # And optionally add the desired page types with their dependencies:
+    # - fluent pages
+    'fluent_pages.pagetypes.fluentpage',
+    'fluent_contents',
+    'fluent_contents.plugins.text',
+
+    # - flat pages
+    'fluent_pages.pagetypes.flatpage',
+    'django_wysiwyg',
+
+    # - redirect nodes
+    'fluent_pages.pagetypes.redirectnode',
+    'any_urlfield',  # optional but recommended
+
+    # filer
+    'easy_thumbnails',
+    'filer',
+
+    # ckeditor
+    'ckeditor',
+    'ckeditor_uploader',
+    'ckeditor_filebrowser_filer',
+
+    # constance
+    'constance',
 ]
+
+FLUENT_PAGES_BASE_TEMPLATE = "fluent_pages/base.html"
+
+# CKEDITOR
+DJANGO_WYSIWYG_FLAVOR = "ckeditor"
+FLUENT_PICTURE_UPLOAD_TO = 'pages'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Undo', 'Redo'],
+            ['Bold', 'Italic', 'Underline', 'Underline', 'Strike', 'SpellChecker'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Styles', 'Format', 'Font', 'FontSize'],
+            ['TextColor', 'BGColor'],
+            ['Link', 'Unlink'],
+            ['FilerImage'],
+            ['Table', 'HorizontalRule'],
+            ['RemoveFormat', 'Source'],
+        ],
+        'extraPlugins': 'filerimage',
+        'removePlugins': 'image'
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,25 +159,27 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'flatwhite.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(PROJECT_ROOT, PROJECT_APP, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.static",
                 'django.template.context_processors.request',
+                "django.template.context_processors.media",
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "constance.context_processors.config",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'flatwhite.wsgi.application'
 
 
 # Database
@@ -100,21 +212,32 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.11/topics/i18n/
+TEST_SITE = False
 
-LANGUAGE_CODE = 'en-us'
+##################
+# LOCAL SETTINGS #
+##################
+# Allow any settings to be defined in local_settings.py which should be
+# ignored in your version control system allowing for settings to be
+# defined per machine.
+f = os.path.join(PROJECT_APP_PATH, "local_settings.py")
 
-TIME_ZONE = 'UTC'
+if os.path.exists(f):
+    import sys
+    import imp
+    module_name = "%s.local_settings" % PROJECT_APP
+    module = imp.new_module(module_name)
+    module.__file__ = f
+    sys.modules[module_name] = module
+    exec(open(f, "rb").read())
 
-USE_I18N = True
 
-USE_L10N = True
+# CSRF
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+else:
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
 
-USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-
-STATIC_URL = '/static/'

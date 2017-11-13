@@ -13,9 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
+	
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^filer/', include('filer.urls')),
+    url(r'^filebrowser_filer/', include('ckeditor_filebrowser_filer.urls')),
+    url(r'^nested_admin/', include('nested_admin.urls')),
     url(r'^admin/', admin.site.urls),
+]
+
+
+urlpatterns += [
+    url(r'', include('fluent_pages.urls')),
 ]

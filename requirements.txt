@@ -3,6 +3,14 @@ django-constance
 django-extensions
 django-form-utils
 django-nested-admin
+django-ckeditor
+django-ckeditor-filebrowser-filer
+django-filer
+django-fluent-pages
+django-fluent-pages[flatpage,redirectnode, fluentpage, text]
+django-fluent-contents
+django-wysiwyg
+django-slug-preview
 
 cssmin
 jsmin

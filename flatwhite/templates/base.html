@@ -1,0 +1,28 @@
+{% load fluent_pages_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="keywords" content="{% block meta-keywords %}{% endblock %}" />
+  <meta name="description" content="{% block meta-description %}{% endblock %}" />
+  <title>{% block full-head-title %}{% block head-title %}Untitled{% endblock %} | My site{% endblock %}</title>
+  {% block extrahead %}{% endblock %}
+</head>
+<body>
+    <header>
+        {% render_menu %}
+    </header>
+
+    <section id="contents">
+        <div id="main">
+            <h1>{{ page.title }}</h1>
+
+            {% render_breadcrumb %}
+
+            {% block main %}
+              {{ page.content }}
+            {% endblock %}
+        </div>
+    </section>
+</body>
+</html>
