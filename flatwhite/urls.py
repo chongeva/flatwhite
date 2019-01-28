@@ -13,34 +13,37 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.urls import path, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
-
-urlpatterns = [
-	
-    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
-    url(r'^filer/', include('filer.urls')),
-    url(r'^filebrowser_filer/', include('ckeditor_filebrowser_filer.urls')),
-    url(r'^nested_admin/', include('nested_admin.urls')),
-    url(r'^admin/', admin.site.urls),
-]
-
 from fluent_pages.sitemaps import PageSitemap
 from fluent_pages.views import RobotsTxtView
 from django.contrib.sitemaps.views import sitemap
+
+urlpatterns = [
+    # path(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    path('filer/', include('filer.urls')),
+    # path(r'^filebrowser_filer/', include('ckeditor_filebrowser_filer.urls')),
+    path('nested_admin/', include('nested_admin.urls')),
+    path('admin/', admin.site.urls),
+]
+
 
 sitemaps = {
     'pages': PageSitemap,
 }
 
 urlpatterns += [
-    url(r'^sitemap.xml$', sitemap, {'sitemaps': sitemaps}),
-    url(r'^robots.txt$', RobotsTxtView.as_view()),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
+    path('robots.txt', RobotsTxtView.as_view()),
 ]
 
 if settings.DEBUG:
+    # Static files
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    urlpatterns += staticfiles_urlpatterns()
+
     # Adds the media URL to be used in development
     urlpatterns += static(
         settings.MEDIA_URL,
@@ -53,5 +56,5 @@ if settings.DEBUG:
     )
 
 urlpatterns += [
-    url(r'', include('fluent_pages.urls')),
+    path('', include('fluent_pages.urls')),
 ]

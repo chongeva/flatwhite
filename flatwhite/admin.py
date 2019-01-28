@@ -24,5 +24,5 @@ class FlatPageAdmin(FlatPageAdminOld):
 
 
 # We have to unregister the normal admin, and then reregister ours
-# admin.site.unregister(FlatPage)
+admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageAdmin)

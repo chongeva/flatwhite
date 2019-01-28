@@ -11,6 +11,9 @@ _Store
 *.old
 *.db-journal
 *.sh
+*.pid
+.DS_Store
+*/.DS_Store
 *sublime*
 CACHE/
 media/

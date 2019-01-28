@@ -77,8 +77,6 @@ SMEDIA_ROOT = os.path.join(STATIC_BASE, PROJECT_APP, 'smedia')
 # Application definition
 
 INSTALLED_APPS = [
-    'flatwhite',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -112,20 +110,23 @@ INSTALLED_APPS = [
     'fluent_pages.pagetypes.redirectnode',
     'any_urlfield',  # optional but recommended
 
+    'flatwhite',
+
     # filer
     'easy_thumbnails',
     'filer',
 
     # ckeditor
     'ckeditor',
-    'ckeditor_uploader',
-    'ckeditor_filebrowser_filer',
+    # 'ckeditor_uploader',
+    # 'ckeditor_filebrowser_filer',
 
     # constance
     'constance',
 ]
 
 FLUENT_PAGES_BASE_TEMPLATE = "fluent_pages/base.html"
+SITE_ID = 1
 
 # CKEDITOR
 DJANGO_WYSIWYG_FLAVOR = "ckeditor"
@@ -148,8 +149,8 @@ CKEDITOR_CONFIGS = {
             ['Table', 'HorizontalRule'],
             ['RemoveFormat', 'Source'],
         ],
-        'extraPlugins': 'filerimage',
-        'removePlugins': 'image'
+        # 'extraPlugins': 'filerimage',
+        # 'removePlugins': 'image'
     },
 }
 
