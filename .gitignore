@@ -12,6 +12,7 @@ _Store
 *.db-journal
 *.sh
 *.pid
+local.py
 .DS_Store
 */.DS_Store
 *sublime*

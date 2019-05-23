@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block body_class %}template-articlepage{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center">
+                    <h1>{{ page.title }}</h1>
+                    {# <p class="meta">{{ page.date }}</p> #}
+                    <div class="intro">{{ page.intro }}</div>
+                </div>
+                <hr>
+
+                {# {{ page.body|richtext }} #}
+                {# {% include_block page.body %} #}
+                <div class="mt-4">
+                {% for block in page.body %}
+                    {% if block.block_type == 'heading' %}
+                        <h2>{{ block.value }}</h2>
+                    {% elif block.block_type == 'carousel' %}
+                        <section class="block-{{ block.block_type }}">
+                            {% include 'includes/carousel.html' %}
+                        </section>
+                    {% else %}
+                        <section class="block-{{ block.block_type }}">
+                            {% include_block block %}
+                        </section>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for item in page.gallery_images.all %}
+                <div class="col-4 mb-4 gallery-item">
+                    <a href="{{ item.image.file.url }}" data-toggle="lightbox" data-footer="{{ item.caption }}">{% image item.image height-240 class="gallery-item-image" %}</a>
+                    <span class="gallery-item-caption">{{ item.caption }}</span>
+                </div>
+            {% endfor %}
+        </div>
+
+    {# <p><a href="{{ page.get_parent.url }}">Return to {{ page.get_parent.title }}</a></p> #}
+    </div>
+</div>
+{% endblock %}

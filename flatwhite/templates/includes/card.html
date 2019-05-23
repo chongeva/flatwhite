@@ -1,0 +1,19 @@
+{% load wagtailimages_tags wagtailembeds_tags static %}
+
+{% if block.value %}
+    <div class="container py-4">
+        <div class="row">
+            {% for card_item in block.value %}
+            <div class="col-2">
+                {% image card_item.value.image original as imagedata %}
+                <div class="card">
+                    <img src="{{ imagedata.url }}" class="card-img-top">
+                    <div class="card-body text-{{ card_item.value.text_align }} p-1 pt-2">
+                        {{ card_item.value.description }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

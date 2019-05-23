@@ -1,0 +1,13 @@
+{% load wagtailimages_tags wagtailembeds_tags static %}
+
+{% if block.value %}
+{% image block.value.image original as imagedata %}
+<div class="text-section" style="{% if block.value.image_display == 'background' %}{% if block.value.image %}background-image: url('{{ imagedata.url }}'); background-size: 100% auto; background-repeat: none; background-position: {{ block.value.image_position }}{% endif %}{% endif %}{% if block.value.background_colour %}background-color: {{ block.value.background_colour }};{% endif %}">
+    <div class="text-section-{{ block.value.text_align }}{% if not block.value.image or block.value.image_display == 'left' or block.value.image_display == 'right' %} text-section-dark{% endif %}">
+        {{ block.value.description }}
+    </div>
+    {% if block.value.image_display == 'left' or block.value.image_display == 'right' %}
+        <img src="{{ imagedata.url }}" class="text-section-image display-{{ block.value.image_display }} position-{{ block.value.image_position|slugify }}" alt="{{ imagedata.alt }}" />
+    {% endif %}
+</div>
+{% endif %}

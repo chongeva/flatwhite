@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags wagtailembeds_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+{# <link rel="stylesheet" href="{% static 'css/welcome_page.css' %}"> #}
+{% endblock extra_css %}
+
+{% block content %}
+
+<div class="cover-section home-hero flex-column d-flex">
+    <div class="home-hero-content d-flex justify-content-center px-4 px-sm-0">
+        <div>
+            <div class="home-hero-function"><span class="text-orange">HelloWorld</span><span class="text-white">()</span></div>
+            <div><span class="text-yellow">def</span> <span class="text-blue">HelloWorld</span><span class="text-white">():</span></div>
+            <div class="home-hero-indent">
+                <span class="text-white">greetings</span> <span class="text-orange">=</span> <span class="text-pale-blue">"I am Eva"</span><br>
+                <span class="text-white">job</span> <span class="text-orange">=</span> <span class="text-pale-blue">"Full-stack Developer"</span><br>
+                <span class="text-white">specialisation</span> <span class="text-orange">=</span> <span class="text-white">[</span><span class="text-pale-blue">"Python"</span><span class="text-white">,</span> <span class="text-pale-blue">"Django"</span><span class="text-white">]</span><br>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row mb-2 mb-sm-4">
+            <div class="col-12 text-center">I am good at</div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-4 text-center text-orange">Structuring Codes</div>
+            <div class="col-12 col-sm-4 text-center text-blue">MVC Architecture</div>
+            <div class="col-12 col-sm-4 text-center text-yellow">Solving Bugs</div>
+        </div>
+    </div>
+
+    <div class="flex-grow-1 d-flex justify-content-center home-social">
+        <div class="align-self-end mb-4">
+            <div class="text-center">Check out my <a href="https://www.linkedin.com/in/eva-chong-606b5449/">LinkedIn</a> profile</div>
+        </div>
+    </div>
+</div>
+
+
+{% comment %}
+{% for block in page.body %}
+    {% if block.block_type == 'carousel' %}
+        <section class="block-{{ block.block_type }}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">{% include 'includes/carousel.html' %}</div>
+                </div>
+            </div>
+        </section>
+    {% elif block.block_type == 'text_section' %}
+        {% include 'includes/text_section.html' %}
+    {% elif block.block_type == 'cover' %}
+        {% include 'includes/cover.html' %}
+    {% elif block.block_type == 'card' %}
+        {% include 'includes/card.html' %}
+    {% else %}
+        <section class="block-{{ block.block_type }}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">{% include_block block %}</div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endfor %}
+{% endcomment %}
+{% endblock content %}

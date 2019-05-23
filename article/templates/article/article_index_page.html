@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-articleindexpage{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>{{ page.title }}</h1>
+
+            <div class="intro">{{ page.intro|richtext }}</div>
+
+            <div class="d-flex flex-row">
+            {% for post in articlepages %}
+                {% with post=post.specific %}
+                    <div class="card mr-2 w-25">
+                        {% with post.main_image as main_image %}
+                            {% if main_image %}{% image main_image fill-300x200 class="card-img-top" %}{% endif %}
+                        {% endwith %}
+
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+                            </div>
+                            <div class="card-text">
+                                {{ post.intro }}
+                            </div>
+                        </div>
+
+                        {# <div class="card-footer"> #}
+                            {# {{ post.body|richtext }} #}
+                        {# </div> #}
+                    </div>
+                {% endwith %}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

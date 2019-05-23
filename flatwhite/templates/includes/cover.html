@@ -1,0 +1,11 @@
+{% load wagtailimages_tags wagtailembeds_tags static %}
+
+{% if block.value %}
+{% image block.value.image original as imagedata %}
+<div class="cover-section{% if block.value.image_size == 'half' %} cover-half{% endif %}" style="{% if block.value.image %}background-image: url('{{ imagedata.url }}'); background-size: cover; background-repeat: no-repeat; background-position: {{ block.value.image_position }}{% endif %}">
+    <div class="hero-text-{{ block.value.text_align }} {% if not block.value.image %}hero-text-dark{% endif %}">
+        {{ block.value.description }}
+    </div>
+    {# <img src="{{ imagedata.url }}" style="width: 100%;" alt="{{ imagedata.alt }}" /> #}
+</div>
+{% endif %}
