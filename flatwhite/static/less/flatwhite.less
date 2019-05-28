@@ -380,6 +380,7 @@ a {
     // background-position: center;
     // background-color: @color-dark;
     font-family: 'Menlo Regular';
+    font-variant-numeric: tabular-nums;
     font-size: 1.5rem;
     line-height: 2rem;
     padding-top: 6rem;
@@ -395,8 +396,8 @@ a {
     @media (max-width: @screen-xs-max) {
         padding-top: 3rem;
         width: 320px;
-        // font-size: 0.9rem;
-        // line-height: 1.4rem;
+        font-size: 1rem;
+        line-height: 1.4rem;
     }
 
     .home-hero-content {
@@ -424,11 +425,10 @@ a {
 
     .home-code-indent {
         padding-left: 3.5rem;
-        font-variant-numeric: tabular-nums;
 
-        // @media (max-width: @screen-xs-max) {
-            // padding-left: 2.1rem;
-        // }
+        @media (max-width: @screen-xs-max) {
+            padding-left: 2.4rem;
+        }
     }
 
     .terminal-cursor {
@@ -437,6 +437,10 @@ a {
         width: 15px;
         -webkit-animation: blink 1s infinite;
         animation: blink 1s infinite;
+
+        @media (max-width: @screen-xs-max) {
+            width: 10px;
+        }
 
         &.hide {
             display: none;

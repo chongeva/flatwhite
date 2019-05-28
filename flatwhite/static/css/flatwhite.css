@@ -294,6 +294,7 @@ a:hover {
 }
 .home-hero {
   font-family: 'Menlo Regular';
+  font-variant-numeric: tabular-nums;
   font-size: 1.5rem;
   line-height: 2rem;
   padding-top: 6rem;
@@ -310,6 +311,8 @@ a:hover {
   .home-hero {
     padding-top: 3rem;
     width: 320px;
+    font-size: 1rem;
+    line-height: 1.4rem;
   }
 }
 .home-hero .home-hero-content {
@@ -336,7 +339,11 @@ a:hover {
 }
 .home-hero .home-code-indent {
   padding-left: 3.5rem;
-  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 414px) {
+  .home-hero .home-code-indent {
+    padding-left: 2.4rem;
+  }
 }
 .home-hero .terminal-cursor {
   background-color: #282828;
@@ -344,6 +351,11 @@ a:hover {
   width: 15px;
   -webkit-animation: blink 1s infinite;
   animation: blink 1s infinite;
+}
+@media (max-width: 414px) {
+  .home-hero .terminal-cursor {
+    width: 10px;
+  }
 }
 .home-hero .terminal-cursor.hide {
   display: none;
