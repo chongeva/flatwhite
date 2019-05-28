@@ -19,6 +19,8 @@
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/wobble.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/jello.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/flatwhite.css' %}">
         
 
@@ -33,6 +35,7 @@
         {% block content %}{% endblock %}
 
         {# Global javascript #}
+        <script type="text/javascript" src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/flatwhite.js' %}"></script>
 

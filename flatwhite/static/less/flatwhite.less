@@ -4,6 +4,15 @@
 @screen-xs-min: 320px;
 @screen-xs-max: 414px; /* iphone 6 plus */
 
+@color-dark: #282828;
+@color-grey-1: #4b4b4b;
+@color-grey-2: #6b6b6b;
+@color-white: #f1f1f1;
+@color-orange: #F49D62;
+@color-blue: #92BFBF;
+@color-paleblue: #BDDCDC;
+@color-yellow: #EDE480;
+
 @font-face {
     font-family: 'Menlo Regular';
     font-style: normal;
@@ -32,34 +41,38 @@ body {
 }
 
 .text-orange {
-    color: #F49D62;
+    color: @color-orange;
 }
 
 .text-white {
-    color: #f1f1f1;
+    color: @color-white;
 }
 
 .text-blue {
-    color: #92BFBF;
+    color: @color-blue;
 }
 
 .text-pale-blue {
-    color: #BDDCDC;
+    color: @color-paleblue;
 }
 
 .text-yellow {
-    color: #EDE480;
+    color: @color-yellow;
+}
+
+.bg-dark {
+    background-color: @color-dark;
 }
 
 .bg-white {
-    background-color: #f1f1f1;
+    background-color: @color-white;
 }
 
 a {
-    color: #f1f1f1;
+    color: @color-white;
     &:hover {
         text-decoration: none;
-        color: #F49D62;
+        color: @color-orange;
     }
 }
 
@@ -78,7 +91,7 @@ a {
     padding: 1rem;
     height: 6rem;
     line-height: 4rem;
-    background-color: #f8f8f8;
+    background-color: @color-white;
 }
 
 .navbar {
@@ -91,12 +104,12 @@ a {
         top: 3.9rem;
         border: 0px;
         border-radius: 0px;
-        background: #343a40;
+        background: @color-dark;
         .dropdown-item {
-            color: white;
+            color: @color-white;
             &:hover {
-                color: #5eb6ff;
-                background-color: #111;
+                color: @color-blue;
+                background-color: @color-dark;
             }
         }
     }
@@ -114,19 +127,19 @@ a {
 .navbar-dark {
     .navbar-nav {
         .nav-link {
-            color: white;
+            color: @color-white;
         }
 
         .active {
             .nav-link {
-                color: #5eb6ff;
+                color: @color-blue;
             }
         }
     }
 }
 
 .cover-section {
-    color: white;
+    color: @color-white;
     height: 100vh;
     position:relative;
 
@@ -147,11 +160,11 @@ a {
     .hero-text-dark {
         h2 {
             text-shadow: none;
-            color: #4b4b4b;
+            color: @color-grey-1;
         }
         p {
             text-shadow: none;
-            color: #6b6b6b;
+            color: @color-grey-2;
         }
     }
 
@@ -182,7 +195,7 @@ a {
 }
 
 .text-section {
-    color: white;
+    color: @color-white;
     padding: 10rem 0rem;
     overflow: hidden;
     position: relative;
@@ -194,11 +207,11 @@ a {
     .text-section-dark {
         h2 {
             text-shadow: none;
-            color: #4b4b4b;
+            color: @color-grey-1;
         }
         p {
             text-shadow: none;
-            color: #6b6b6b;
+            color: @color-grey-2;
         }
     }
 
@@ -295,7 +308,7 @@ a {
         top: 50%;
         left: 0;
         transform: translate(0, -50%);
-        color: white;
+        color: @color-white;
         font-size: 1.5rem;
         opacity: 0;
         transition: all 0.5s;
@@ -342,16 +355,21 @@ a {
 
 
 // HOME HERO
+@keyframes blink {
+  0%, 60% {background-color: @color-dark;}
+  10%, 50% {background-color: @color-white;}
+}
+
 .home-hero {
     // background-image: url('img/');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #282828;
+    background-color: @color-dark;
     font-family: 'Menlo Regular';
     font-size: 1.5rem;
     line-height: 2rem;
-    padding-top: 8rem;
+    padding-top: 6rem;
     word-break: break-word;
 
     @media (max-width: @screen-xs-max) {
@@ -368,22 +386,53 @@ a {
 
         .home-hero-function {
             margin-bottom: 2rem;
+            display: inline-block;
 
             @media (max-width: @screen-xs-max) {
                 margin-bottom: 1rem;
             }
-        }
 
-        .home-hero-indent {
-            padding-left: 3.5rem;
-
-            @media (max-width: @screen-xs-max) {
-                padding-left: 2.1rem;
+            &:hover {
+                -webkit-animation: jello-horizontal 0.9s both;
+                animation: jello-horizontal 0.9s both;
+                cursor: default;
             }
         }
     }
 
     .home-social {
         font-size: 1rem;
+        position: absolute;
+        bottom: 0rem;
+        width: 100%;
+
+        .anim-object {
+            
+        }
+        .anim-object:hover {
+            -webkit-animation: wobble-hor-bottom 0.8s both;
+            animation: wobble-hor-bottom 0.8s both;
+        }
+    }
+
+    .home-code-indent {
+        padding-left: 3.5rem;
+        font-variant-numeric: tabular-nums;
+
+        @media (max-width: @screen-xs-max) {
+            padding-left: 2.1rem;
+        }
+    }
+
+    .terminal-cursor {
+        background-color: @color-dark;
+        position: absolute;
+        width: 15px;
+        -webkit-animation: blink 1s infinite;
+        animation: blink 1s infinite;
+
+        &.hide {
+            display: none;
+        }
     }
 }
