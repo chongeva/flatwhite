@@ -13,59 +13,65 @@ Delete the line below if you're just getting started and want to remove the welc
 
 {% block content %}
 
-<div class="cover-section home-hero">
-    <div class="container">
-        <div class="row home-hero-content">
-            <div class="col-12">
-                <div class="home-hero-function"><span class="text-orange">HelloWorld</span><span class="text-white">()</span></div>
-                <div><span class="text-yellow">def</span> <span class="text-blue">HelloWorld</span><span class="text-white">():</span></div>
-                <div class="home-code-indent">
-                    <span class="text-white">greetings</span> <span class="text-orange">=</span> <span class="text-pale-blue">"I am Eva"</span><br>
-                    <span class="text-white">job</span> <span class="text-orange">=</span> <span class="text-pale-blue">"Full-stack Developer"</span><br>
-                    <span class="text-white">specialisation</span> <span class="text-orange">=</span> <span class="text-white">[</span><span class="text-pale-blue">"Python"</span><span class="text-white">,</span> <span class="text-pale-blue">"Django"</span><span class="text-white">]</span><br>
-                </div>
+<div id="particles-js">
+</div>
+<div class="home-hero">
+    <div class="home-hero-content">
+        <div>
+            <div class="home-hero-function"><span class="text-orange">HelloWorld</span><span class="text-white">()</span></div>
+            <div><span class="text-yellow">def</span> <span class="text-blue">HelloWorld</span><span class="text-white">():</span></div>
+            <div class="home-code-indent">
+                <span class="text-white">greetings</span> <span class="text-orange">=</span> <span class="text-pale-blue">"I am Eva"</span><br>
+                <span class="text-white">job</span> <span class="text-orange">=</span> <span class="text-pale-blue">"Full-stack Developer"</span><br>
+                <span class="text-white">specialisation</span> <span class="text-orange">=</span> <span class="text-white">[</span><span class="text-pale-blue">"Python"</span><span class="text-white">,</span> <span class="text-pale-blue">"Django"</span><span class="text-white">]</span><br>
             </div>
-        </div>
-    
-    
-        <div class="row mb-2">
-            <div class="col-12">I am good at</div>
-        </div>
-        <div class="row">
-            <div class="col-12 text-orange">
-                <div class="home-code-indent">
-                    <span class="terminal-cursor hide" data-line="1" data-char="17">&nbsp;</span>Structuring Codes
-                </div>
-            </div>
-
-            <div class="col-12 text-blue">
-                <div class="home-code-indent">
-                    <span class="terminal-cursor hide" data-line="2" data-char="16">&nbsp;</span>MVC Architecture
-                </div>
-            </div>
-
-            <div class="col-12 text-yellow">
-                <div class="home-code-indent">
-                    <span class="terminal-cursor" data-line="3" data-char="12">&nbsp;</span>Solving Bugs
-                </div>
-            </div>
-
         </div>
     </div>
 
-    <div class="home-social mb-4">
-        <div class="d-flex justify-content-center">
-            <div class="mr-2">Check out my</div>
-            <a href="https://www.linkedin.com/in/eva-chong-606b5449/" class="anim-object">LinkedIn</a>
-            <div class="ml-2">profile</div>
-        </div>
+
+    <div class="mb-2">
+        <div class="text-white">I am good at</div>
     </div>
-    
+    <div class="">
+        <div class="text-orange">
+            <div class="home-code-indent">
+                <span class="terminal-cursor hide" data-line="1" data-char="17">&nbsp;</span>Structuring Codes
+            </div>
+        </div>
+
+        <div class="text-blue">
+            <div class="home-code-indent">
+                <span class="terminal-cursor hide" data-line="2" data-char="16">&nbsp;</span>MVC Architecture
+            </div>
+        </div>
+
+        <div class="text-yellow">
+            <div class="home-code-indent">
+                <span class="terminal-cursor" data-line="3" data-char="12">&nbsp;</span>Solving Bugs
+            </div>
+        </div>
+
+    </div> 
+</div>
+
+<div class="home-social mb-4">
+    <div class="d-flex justify-content-center">
+        <div class="mr-2 text-white">Check out my</div>
+        <a href="https://www.linkedin.com/in/eva-chong-606b5449/" class="anim-object">LinkedIn</a>
+        <div class="ml-2 text-white">profile</div>
+    </div>
 </div>
 {% endblock content %}
 
 {% block extra_js %}
+<script src="{% static 'vendor/particles/particles.min.js' %}"></script>
+
 <script type="text/javascript">
+    /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+    particlesJS.load('particles-js', '{% static "vendor/particles/particles.json" %}', function() {
+      console.log('callback - particles.js config loaded');
+    });
+
     var current_line = 3
     var cursor_char_position = $(".terminal-cursor[data-line='"+current_line+"']").data("char");
     var cursor_size = 14.5;

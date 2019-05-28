@@ -281,20 +281,35 @@ a:hover {
     background-color: #f1f1f1;
   }
 }
-.home-hero {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+#particles-js {
+  width: 100%;
+  height: 99vh;
   background-color: #282828;
+  background-image: url('');
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: 0;
+}
+.home-hero {
   font-family: 'Menlo Regular';
   font-size: 1.5rem;
   line-height: 2rem;
   padding-top: 6rem;
   word-break: break-word;
+  position: absolute;
+  z-index: 100;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 800px;
 }
 @media (max-width: 414px) {
   .home-hero {
     padding-top: 3rem;
+    width: 320px;
   }
 }
 .home-hero .home-hero-content {
@@ -319,16 +334,6 @@ a:hover {
   animation: jello-horizontal 0.9s both;
   cursor: default;
 }
-.home-hero .home-social {
-  font-size: 1rem;
-  position: absolute;
-  bottom: 0rem;
-  width: 100%;
-}
-.home-hero .home-social .anim-object:hover {
-  -webkit-animation: wobble-hor-bottom 0.8s both;
-  animation: wobble-hor-bottom 0.8s both;
-}
 .home-hero .home-code-indent {
   padding-left: 3.5rem;
   font-variant-numeric: tabular-nums;
@@ -342,4 +347,14 @@ a:hover {
 }
 .home-hero .terminal-cursor.hide {
   display: none;
+}
+.home-social {
+  font-size: 1rem;
+  position: absolute;
+  bottom: 0rem;
+  width: 100%;
+}
+.home-social .anim-object:hover {
+  -webkit-animation: wobble-hor-bottom 0.8s both;
+  animation: wobble-hor-bottom 0.8s both;
 }
