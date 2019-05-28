@@ -83,10 +83,20 @@ Delete the line below if you're just getting started and want to remove the welc
     }
 
     var cursor_pos_x = (cursor_char_position*cursor_size);
-        var default_translate = "translateX(" + cursor_pos_x + "px)";
-    
-
+    var default_translate = "translateX(" + cursor_pos_x + "px)";
     $(".terminal-cursor[data-line='"+current_line+"']").css("transform", default_translate);
+
+    $(window).resize(function() {
+      windowsize = $(window).width();
+      if (windowsize > 414) {
+            var cursor_size = 14.5;
+        } else {
+            var cursor_size = 9.7;
+        }
+        var cursor_pos_x = (cursor_char_position*cursor_size);
+        var default_translate = "translateX(" + cursor_pos_x + "px)";
+        $(".terminal-cursor[data-line='"+current_line+"']").css("transform", default_translate);
+    });
 
     document.addEventListener("keydown", function(event) {
         if (parseInt(event.which) == 39) {
