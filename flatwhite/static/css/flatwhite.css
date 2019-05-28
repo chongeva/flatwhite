@@ -294,8 +294,7 @@ a:hover {
 }
 @media (max-width: 414px) {
   .home-hero {
-    font-size: 0.9rem;
-    line-height: 1.4rem;
+    padding-top: 3rem;
   }
 }
 .home-hero .home-hero-content {
@@ -333,11 +332,6 @@ a:hover {
 .home-hero .home-code-indent {
   padding-left: 3.5rem;
   font-variant-numeric: tabular-nums;
-}
-@media (max-width: 414px) {
-  .home-hero .home-code-indent {
-    padding-left: 2.1rem;
-  }
 }
 .home-hero .terminal-cursor {
   background-color: #282828;

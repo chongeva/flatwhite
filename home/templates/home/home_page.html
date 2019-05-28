@@ -32,9 +32,24 @@ Delete the line below if you're just getting started and want to remove the welc
             <div class="col-12">I am good at</div>
         </div>
         <div class="row">
-            <div class="col-12 home-code-indent text-orange"><span class="terminal-cursor hide" data-line="1" data-char="17">&nbsp;</span>Structuring Codes</div>
-            <div class="col-12 home-code-indent text-blue"><span class="terminal-cursor hide" data-line="2" data-char="16">&nbsp;</span>MVC Architecture</div>
-            <div class="col-12 home-code-indent text-yellow"><span class="terminal-cursor" data-line="3" data-char="12">&nbsp;</span>Solving Bugs</div>
+            <div class="col-12 text-orange">
+                <div class="home-code-indent">
+                    <span class="terminal-cursor hide" data-line="1" data-char="17">&nbsp;</span>Structuring Codes
+                </div>
+            </div>
+
+            <div class="col-12 text-blue">
+                <div class="home-code-indent">
+                    <span class="terminal-cursor hide" data-line="2" data-char="16">&nbsp;</span>MVC Architecture
+                </div>
+            </div>
+
+            <div class="col-12 text-yellow">
+                <div class="home-code-indent">
+                    <span class="terminal-cursor" data-line="3" data-char="12">&nbsp;</span>Solving Bugs
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -56,7 +71,6 @@ Delete the line below if you're just getting started and want to remove the welc
     var cursor_size = 14.5;
     var cursor_pos_x = (cursor_char_position*cursor_size);
     var default_translate = "translateX(" + cursor_pos_x + "px)";
-
 
     $(".terminal-cursor[data-line='"+current_line+"']").css("transform", default_translate);
 
