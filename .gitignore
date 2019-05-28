@@ -10,7 +10,6 @@ _Store
 *.orig
 *.old
 *.db-journal
-*.sh
 *.pid
 local.py
 .DS_Store
