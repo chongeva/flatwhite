@@ -51,10 +51,15 @@ Delete the line below if you're just getting started and want to remove the welc
 
 {% block extra_js %}
 <script type="text/javascript">
-    var cursor_pos_x = 0;
-    var cursor_char_position = 0;
     var current_line = 3
-    var cursor_size = 14.5
+    var cursor_char_position = $(".terminal-cursor[data-line='"+current_line+"']").data("char");
+    var cursor_size = 14.5;
+    var cursor_pos_x = (cursor_char_position*cursor_size);
+    var default_translate = "translateX(" + cursor_pos_x + "px)";
+
+
+    $(".terminal-cursor[data-line='"+current_line+"']").css("transform", default_translate);
+
     document.addEventListener("keydown", function(event) {
         if (parseInt(event.which) == 39) {
             // Right
